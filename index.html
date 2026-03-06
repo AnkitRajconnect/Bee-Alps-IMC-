@@ -4,1840 +4,710 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BeeAlp — Marketing Case Study</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --teal: #0EA5C8;
-    --teal-light: #2BD4F0;
-    --dark: #0D1B2A;
-    --darker: #070F18;
-    --mid: #132237;
-    --text: #E8EDF2;
-    --muted: #7A94AA;
-    --white: #ffffff;
-    --accent: #F5C842;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--darker);
-    color: var(--text);
-    overflow-x: hidden;
-  }
-
-  /* ── NOISE OVERLAY ── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.3;
-  }
-
-  /* ── TYPOGRAPHY ── */
-  h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
-
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-bg-glow {
-    position: absolute;
-    width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(14,165,200,0.18) 0%, transparent 70%);
-    top: -100px; right: -100px;
-    pointer-events: none;
-  }
-
-  .hero-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 60px 80px 80px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(14,165,200,0.12);
-    border: 1px solid rgba(14,165,200,0.3);
-    color: var(--teal-light);
-    padding: 6px 14px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin-bottom: 32px;
-    width: fit-content;
-  }
-
-  .badge-dot {
-    width: 6px; height: 6px;
-    background: var(--teal-light);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
-  }
-
-  .hero-title {
-    font-size: clamp(52px, 6vw, 88px);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: 28px;
-    color: var(--white);
-  }
-
-  .hero-title span {
-    color: var(--teal);
-    display: block;
-  }
-
-  .hero-desc {
-    font-size: 17px;
-    font-weight: 300;
-    color: var(--muted);
-    line-height: 1.65;
-    max-width: 420px;
-    margin-bottom: 48px;
-  }
-
-  .hero-meta {
-    display: flex;
-    gap: 40px;
-  }
-
-  .meta-item label {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 4px;
-  }
-
-  .meta-item strong {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--white);
-  }
-
-  .hero-right {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-
-  .phone-mockup-container {
-    position: relative;
-    width: 280px;
-  }
-
-  .hero-phone {
-    width: 100%;
-    filter: drop-shadow(0 40px 80px rgba(14,165,200,0.3));
-    animation: float 4s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(-3deg); }
-    50% { transform: translateY(-20px) rotate(-3deg); }
-  }
-
-  .hero-grid-bg {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(14,165,200,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(14,165,200,0.06) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  /* ── STATS BAR ── */
-  .stats-bar {
-    background: var(--mid);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .stat-item {
-    padding: 32px 40px;
-    border-right: 1px solid rgba(255,255,255,0.06);
-    position: relative;
-  }
-
-  .stat-item:last-child { border-right: none; }
-
-  .stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 42px;
-    font-weight: 800;
-    color: var(--teal);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-label {
-    font-size: 13px;
-    color: var(--muted);
-    font-weight: 300;
-  }
-
-  /* ── SECTION BASE ── */
-  section { padding: 100px 80px; position: relative; z-index: 1; }
-
-  .section-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal);
-    font-weight: 500;
-    margin-bottom: 16px;
-  }
-
-  .section-title {
-    font-size: clamp(32px, 4vw, 52px);
-    font-weight: 800;
-    line-height: 1.05;
-    color: var(--white);
-    margin-bottom: 20px;
-  }
-
-  .section-sub {
-    font-size: 16px;
-    color: var(--muted);
-    font-weight: 300;
-    max-width: 560px;
-    line-height: 1.7;
-  }
-
-  /* ── PROBLEM SECTION ── */
-  .problem {
-    background: var(--dark);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-
-  .problem-visual {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 20px;
-    padding: 48px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .problem-visual::before {
-    content: '';
-    position: absolute;
-    top: -1px; left: 40px;
-    width: 100px; height: 3px;
-    background: var(--teal);
-  }
-
-  .problem-stat {
-    font-family: 'Syne', sans-serif;
-    font-size: 80px;
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1;
-    margin-bottom: 12px;
-  }
-
-  .problem-stat span {
-    font-size: 40px;
-    color: var(--teal);
-  }
-
-  .problem-text {
-    font-size: 15px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 32px;
-  }
-
-  .mini-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 24px;
-  }
-
-  .mini-stat {
-    background: rgba(14,165,200,0.08);
-    border: 1px solid rgba(14,165,200,0.2);
-    border-radius: 12px;
-    padding: 16px 20px;
-  }
-
-  .mini-stat-num {
-    font-family: 'Syne', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--teal-light);
-  }
-
-  .mini-stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  /* ── STRATEGY SECTION ── */
-  .strategy { background: var(--darker); }
-
-  .strategy-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 60px;
-  }
-
-  .strategy-card {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 36px;
-    transition: transform 0.3s, border-color 0.3s;
-    cursor: default;
-  }
-
-  .strategy-card:hover {
-    transform: translateY(-6px);
-    border-color: rgba(14,165,200,0.35);
-  }
-
-  .card-number {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    color: var(--teal);
-    margin-bottom: 20px;
-  }
-
-  .card-icon {
-    width: 48px; height: 48px;
-    background: rgba(14,165,200,0.1);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-
-  .card-body {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  /* ── CONTENT PILLARS ── */
-  .pillars { background: var(--dark); }
-
-  .pillars-layout {
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 80px;
-    margin-top: 60px;
-    align-items: start;
-  }
-
-  .pillar-list { display: flex; flex-direction: column; gap: 16px; }
-
-  .pillar-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 24px;
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 14px;
-    transition: border-color 0.3s;
-  }
-
-  .pillar-item:hover { border-color: rgba(14,165,200,0.4); }
-
-  .pillar-icon {
-    width: 42px; height: 42px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .pillar-icon.teal { background: rgba(14,165,200,0.15); }
-  .pillar-icon.gold { background: rgba(245,200,66,0.15); }
-  .pillar-icon.green { background: rgba(34,197,94,0.15); }
-  .pillar-icon.purple { background: rgba(139,92,246,0.15); }
-  .pillar-icon.red { background: rgba(239,68,68,0.15); }
-
-  .pillar-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
-
-  .pillar-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  /* Social Funnel */
-  .funnel-visual {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 20px;
-    padding: 40px;
-    overflow: hidden;
-  }
-
-  .funnel-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 32px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .funnel-steps { display: flex; flex-direction: column; gap: 4px; }
-
-  .funnel-step {
-    border-radius: 10px;
-    padding: 18px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: transform 0.2s;
-  }
-
-  .funnel-step:hover { transform: translateX(6px); }
-
-  .funnel-step.a { background: rgba(14,165,200,0.25); border-left: 3px solid var(--teal); }
-  .funnel-step.i { background: rgba(14,165,200,0.18); border-left: 3px solid rgba(14,165,200,0.7); }
-  .funnel-step.d { background: rgba(14,165,200,0.12); border-left: 3px solid rgba(14,165,200,0.5); }
-  .funnel-step.act { background: rgba(14,165,200,0.07); border-left: 3px solid rgba(14,165,200,0.3); }
-
-  .funnel-label {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--white);
-  }
-
-  .funnel-objective {
-    font-size: 13px;
-    color: var(--muted);
-    margin-left: 12px;
-    flex: 1;
-  }
-
-  .funnel-platform {
-    font-size: 11px;
-    color: var(--teal-light);
-    text-align: right;
-    font-weight: 500;
-  }
-
-  .funnel-kpi-bar {
-    margin-top: 24px;
-    padding-top: 24px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-
-  .kpi-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-
-  .kpi-label { font-size: 12px; color: var(--muted); }
-  .kpi-badge {
-    background: rgba(14,165,200,0.12);
-    border: 1px solid rgba(14,165,200,0.25);
-    color: var(--teal-light);
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 10px;
-    border-radius: 100px;
-  }
-
-  /* ── CROWDFUNDING CAMPAIGN ── */
-  .campaign { background: var(--darker); }
-
-  .timeline-container {
-    margin-top: 60px;
-    position: relative;
-  }
-
-  .timeline-line {
-    position: absolute;
-    top: 28px;
-    left: 0; right: 0;
-    height: 2px;
-    background: rgba(255,255,255,0.08);
-  }
-
-  .timeline-progress {
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(90deg, var(--teal), var(--teal-light));
-  }
-
-  .timeline-phases {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    position: relative;
-  }
-
-  .phase-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 0;
-  }
-
-  .phase-dot {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 800;
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 1;
-    flex-shrink: 0;
-  }
-
-  .phase-dot.p1 { background: var(--teal); color: var(--darker); }
-  .phase-dot.p2 { background: rgba(14,165,200,0.7); color: var(--darker); }
-  .phase-dot.p3 { background: var(--accent); color: var(--darker); }
-  .phase-dot.p4 { background: rgba(14,165,200,0.4); color: var(--white); }
-
-  .phase-card {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 14px;
-    padding: 24px;
-    margin: 0 8px;
-    width: 100%;
-  }
-
-  .phase-date {
-    font-size: 11px;
-    color: var(--teal);
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-  }
-
-  .phase-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 12px;
-  }
-
-  .phase-budget {
-    font-family: 'Syne', sans-serif;
-    font-size: 22px;
-    font-weight: 800;
-    color: var(--teal-light);
-    margin-bottom: 12px;
-  }
-
-  .phase-kpi {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  .phase-kpi strong { color: var(--white); }
-
-  /* ── COMPETITIVE SECTION ── */
-  .competitive { background: var(--dark); }
-
-  .comp-table-wrap {
-    margin-top: 60px;
-    overflow: hidden;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.07);
-  }
-
-  .comp-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .comp-table thead tr {
-    background: rgba(14,165,200,0.12);
-  }
-
-  .comp-table th {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--teal);
-    padding: 16px 24px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255,255,255,0.07);
-  }
-
-  .comp-table td {
-    padding: 16px 24px;
-    font-size: 13px;
-    color: var(--muted);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    vertical-align: middle;
-  }
-
-  .comp-table tr:last-child td { border-bottom: none; }
-
-  .comp-table tr.beealp-row { background: rgba(14,165,200,0.07); }
-
-  .comp-table tr.beealp-row td { color: var(--white); font-weight: 500; }
-
-  .comp-table td.brand {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--white);
-  }
-
-  .comp-table tr.beealp-row td.brand { color: var(--teal-light); }
-
-  .tag {
-    display: inline-block;
-    padding: 3px 10px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 600;
-  }
-
-  .tag.green { background: rgba(34,197,94,0.15); color: #4ade80; }
-  .tag.teal { background: rgba(14,165,200,0.15); color: var(--teal-light); }
-  .tag.red { background: rgba(239,68,68,0.12); color: #f87171; }
-
-  /* ── SOCIAL STRATEGY ── */
-  .social { background: var(--darker); }
-
-  .social-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 40px;
-    margin-top: 60px;
-    align-items: start;
-  }
-
-  .channels-list { display: flex; flex-direction: column; gap: 12px; }
-
-  .channel-item {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 20px 24px;
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 12px;
-  }
-
-  .channel-icon {
-    width: 40px; height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-  }
-
-  .channel-name {
-    font-family: 'Syne', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--white);
-    flex: 1;
-  }
-
-  .channel-freq {
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  .channel-role {
-    font-size: 12px;
-    color: var(--teal-light);
-    text-align: right;
-  }
-
-  .tone-card {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 36px;
-  }
-
-  .tone-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 24px;
-  }
-
-  .tone-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 28px;
-  }
-
-  .tone-tag {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text);
-    padding: 7px 16px;
-    border-radius: 100px;
-    font-size: 13px;
-  }
-
-  .actors-title {
-    font-size: 12px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
-
-  .actors-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .actor-item {
-    background: rgba(14,165,200,0.08);
-    border: 1px solid rgba(14,165,200,0.2);
-    border-radius: 10px;
-    padding: 14px;
-    text-align: center;
-  }
-
-  .actor-role {
-    font-family: 'Syne', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--white);
-  }
-
-  .actor-sub {
-    font-size: 11px;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-
-  /* ── KPIs ── */
-  .kpis { background: var(--dark); }
-
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-top: 60px;
-  }
-
-  .kpi-card {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 36px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .kpi-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: var(--teal);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-  }
-
-  .kpi-card:hover::after { transform: scaleX(1); }
-
-  .kpi-phase {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--teal);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .kpi-phase::before {
-    content: '';
-    width: 20px; height: 2px;
-    background: var(--teal);
-  }
-
-  .kpi-metrics { display: flex; flex-direction: column; gap: 14px; }
-
-  .kpi-metric {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-
-  .kpi-metric:last-child { border-bottom: none; padding-bottom: 0; }
-
-  .kpi-metric-label { font-size: 13px; color: var(--muted); }
-
-  .kpi-metric-val {
-    font-family: 'Syne', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--teal-light);
-  }
-
-  /* ── FOOTER / CTA ── */
-  .footer {
-    background: var(--mid);
-    border-top: 1px solid rgba(255,255,255,0.06);
-    padding: 80px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .footer-glow {
-    position: absolute;
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(14,165,200,0.12) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-
-  .footer-title {
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 800;
-    color: var(--white);
-    margin-bottom: 16px;
-    position: relative;
-  }
-
-  .footer-sub {
-    font-size: 16px;
-    color: var(--muted);
-    margin-bottom: 40px;
-    position: relative;
-  }
-
-  .footer-tags {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    position: relative;
-  }
-
-  .footer-tag {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--muted);
-    padding: 8px 20px;
-    border-radius: 100px;
-    font-size: 13px;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(14,165,200,0.4), transparent);
-    margin: 0 80px;
-  }
-
-  /* ── SCROLL ANIMATION ── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
-  /* ── UGC SECTION ── */
-  .ugc { background: var(--darker); }
-
-  .ugc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-top: 60px;
-  }
-
-  .ugc-card {
-    background: var(--mid);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 16px;
-    padding: 36px;
-    position: relative;
-  }
-
-  .ugc-card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .ugc-card-body {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-  }
-
-  .benefit-list { display: flex; flex-direction: column; gap: 10px; }
-
-  .benefit-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
-    color: var(--text);
-  }
-
-  .benefit-check {
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: rgba(14,165,200,0.15);
-    border: 1px solid rgba(14,165,200,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 10px;
-    color: var(--teal-light);
-    margin-top: 1px;
-  }
-
-  /* ── MOBILE RESPONSIVE ── */
-  @media (max-width: 768px) {
-
-    /* Section padding */
-    section { padding: 60px 20px; }
-    .divider { margin: 0 20px; }
-
-    /* Hero */
-    .hero {
-      grid-template-columns: 1fr;
-      min-height: auto;
-    }
-    .hero-left {
-      padding: 60px 24px 40px;
-      order: 1;
-    }
-    .hero-right {
-      order: 2;
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .phone-mockup-container { width: 160px; }
-    .hero-meta {
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* Stats bar */
-    .stats-bar {
-      grid-template-columns: 1fr 1fr;
-    }
-    .stat-item {
-      padding: 24px 20px;
-      border-right: none;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .stat-item:nth-child(odd) { border-right: 1px solid rgba(255,255,255,0.06); }
-    .stat-item:nth-child(3),
-    .stat-item:nth-child(4) { border-bottom: none; }
-    .stat-num { font-size: 30px; }
-
-    /* Problem */
-    .problem {
-      grid-template-columns: 1fr;
-      gap: 40px;
-      padding: 60px 20px;
-    }
-    .problem-stat { font-size: 56px; }
-    .problem-stat span { font-size: 28px; }
-
-    /* Strategy */
-    .strategy-grid {
-      grid-template-columns: 1fr;
-      margin-top: 40px;
-    }
-
-    /* Pillars */
-    .pillars-layout {
-      grid-template-columns: 1fr;
-      gap: 40px;
-      margin-top: 40px;
-    }
-
-    /* Timeline — stack vertically */
-    .timeline-container { margin-top: 40px; }
-    .timeline-line { display: none; }
-    .timeline-phases {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .phase-col { align-items: flex-start; flex-direction: row; gap: 16px; }
-    .phase-dot {
-      width: 44px; height: 44px;
-      font-size: 11px;
-      flex-shrink: 0;
-      margin-bottom: 0;
-    }
-    .phase-card { margin: 0; width: 100%; }
-
-    /* Competitive table — scrollable */
-    .comp-table-wrap { overflow-x: auto; }
-    .comp-table { min-width: 640px; }
-
-    /* Social */
-    .social-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-      margin-top: 40px;
-    }
-    .channel-item { flex-wrap: wrap; gap: 12px; }
-    .channel-freq { flex: none; }
-    .channel-role { flex: none; }
-
-    /* UGC */
-    .ugc-grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    /* KPIs */
-    .kpi-grid {
-      grid-template-columns: 1fr;
-      margin-top: 40px;
-    }
-
-    /* Financial summary — 2x2 */
-    .fin-summary {
-      grid-template-columns: 1fr 1fr !important;
-    }
-    .fin-summary > div {
-      border-right: none !important;
-      border-bottom: 1px solid rgba(255,255,255,0.06) !important;
-      padding: 20px !important;
-    }
-    .fin-summary > div:nth-child(odd) {
-      border-right: 1px solid rgba(255,255,255,0.06) !important;
-    }
-    .fin-summary > div:nth-child(3),
-    .fin-summary > div:nth-child(4) {
-      border-bottom: none !important;
-    }
-    .fin-summary .fin-num { font-size: 28px !important; }
-
-    /* Footer */
-    .footer { padding: 60px 24px; }
-    .footer-tags { flex-direction: column; align-items: center; }
-
-    /* Mini stats */
-    .mini-stats { grid-template-columns: 1fr 1fr; }
-
-    /* Funnel step */
-    .funnel-step { flex-direction: column; gap: 8px; }
-    .funnel-platform { text-align: left; }
-
-    /* Actors grid */
-    .actors-grid { grid-template-columns: 1fr; }
-
-    /* Section title */
-    .section-title { font-size: 28px; }
-    .hero-title { font-size: 44px; }
-  }
-
-  @media (max-width: 420px) {
-    .hero-title { font-size: 36px; }
-    .stat-num { font-size: 26px; }
-    .problem-stat { font-size: 48px; }
-    section { padding: 48px 16px; }
-    .strategy-card, .ugc-card, .kpi-card, .pillar-item { padding: 24px 20px; }
-    .funnel-visual { padding: 24px 20px; }
-    .tone-card { padding: 24px 20px; }
-  }
-
-  /* Role label chip */
-  .role-chip {
-    display: inline-block;
-    background: rgba(245,200,66,0.12);
-    border: 1px solid rgba(245,200,66,0.3);
-    color: var(--accent);
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 12px;
-    border-radius: 100px;
-    margin-bottom: 32px;
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:#07111C;color:#D4E0EA;overflow-x:hidden;min-height:100vh}
+:root{
+  --teal:#0EA5C8;--teal2:#2BD4F0;--accent:#F5C842;
+  --dark:#07111C;--card:#0F1E2E;--border:rgba(255,255,255,0.07);
+  --muted:#6B849A;--white:#fff;--text:#D4E0EA;
+  --nav-h:60px;
+}
+nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);
+  background:rgba(7,17,28,0.94);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;z-index:100;gap:12px;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:17px;font-weight:800;
+  color:var(--white);cursor:pointer;white-space:nowrap;flex-shrink:0;
+}
+.nav-logo span{color:var(--teal)}
+.nav-pages{display:flex;align-items:center;gap:3px;overflow-x:auto;scrollbar-width:none}
+.nav-pages::-webkit-scrollbar{display:none}
+.nav-btn{
+  background:none;border:none;color:var(--muted);
+  font-family:'Inter',sans-serif;font-size:12px;font-weight:500;
+  padding:5px 9px;border-radius:6px;cursor:pointer;
+  transition:color .2s,background .2s;white-space:nowrap;
+}
+.nav-btn:hover{color:var(--white);background:rgba(255,255,255,0.06)}
+.nav-btn.active{color:var(--teal);background:rgba(14,165,200,0.1)}
+.progress-dots{display:flex;gap:5px;flex-shrink:0}
+.progress-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  transition:background .3s,transform .3s;cursor:pointer;
+}
+.progress-dot.active{background:var(--teal);transform:scale(1.3)}
+.page{display:none;min-height:100vh;padding-top:var(--nav-h);animation:fadeIn .3s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.page-inner{max-width:860px;margin:0 auto;padding:44px 20px 100px}
+.pg-header{margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+.pg-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--teal);margin-bottom:14px;
+}
+.pg-eyebrow-circle{
+  width:22px;height:22px;border-radius:50%;background:var(--teal);
+  color:var(--dark);font-size:11px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.pg-title{
+  font-family:'Syne',sans-serif;font-size:clamp(26px,5vw,40px);
+  font-weight:800;color:var(--white);line-height:1.1;margin-bottom:10px;
+}
+.pg-sub{font-size:14px;color:var(--muted);line-height:1.65;max-width:580px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(14,165,200,0.1);border:1px solid rgba(14,165,200,0.25);
+  color:var(--teal2);font-size:11px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:5px 13px;border-radius:100px;margin-bottom:24px;
+}
+.bdot{width:6px;height:6px;border-radius:50%;background:var(--teal2);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-title{
+  font-family:'Syne',sans-serif;font-size:clamp(38px,7vw,68px);
+  font-weight:800;color:var(--white);line-height:.95;margin-bottom:6px;letter-spacing:-.02em;
+}
+.hero-title .sub{color:var(--teal);display:block;font-size:clamp(18px,3vw,32px);font-weight:700;margin-top:6px}
+.hero-desc{font-size:15px;color:var(--muted);line-height:1.7;max-width:540px;margin:20px 0 36px}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px}
+.meta-chip{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:10px 16px}
+.meta-chip label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px}
+.meta-chip strong{font-size:13px;font-weight:600;color:var(--white)}
+.idx-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+.idx-grid{display:flex;flex-direction:column;gap:7px}
+.idx-item{
+  display:flex;align-items:center;gap:14px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:11px;padding:14px 18px;cursor:pointer;
+  transition:border-color .2s,background .2s,transform .2s;
+}
+.idx-item:hover{border-color:rgba(14,165,200,.4);background:rgba(14,165,200,.05);transform:translateX(4px)}
+.idx-num{
+  width:30px;height:30px;border-radius:7px;background:rgba(14,165,200,.12);
+  color:var(--teal);font-family:'Syne',sans-serif;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.idx-info{flex:1}
+.idx-name{font-size:14px;font-weight:600;color:var(--white);margin-bottom:1px}
+.idx-desc{font-size:12px;color:var(--muted)}
+.idx-arr{color:var(--muted);font-size:14px;transition:color .2s;flex-shrink:0}
+.idx-item:hover .idx-arr{color:var(--teal)}
+.sec{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.sec::before{content:'';width:14px;height:2px;background:var(--teal);flex-shrink:0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:20px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}
+.sbox{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:18px;text-align:center}
+.sbox .n{font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:var(--teal);line-height:1;margin-bottom:5px}
+.sbox .l{font-size:11px;color:var(--muted);line-height:1.4}
+.hl{background:rgba(14,165,200,.07);border:1px solid rgba(14,165,200,.2);border-radius:11px;padding:18px 20px;margin:16px 0}
+.hl p{font-size:14px;line-height:1.7;color:var(--text)}
+.hl strong{color:var(--white)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.items{display:flex;flex-direction:column;gap:9px;margin:14px 0}
+.item{display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:14px 16px}
+.iico{width:34px;height:34px;border-radius:7px;background:rgba(14,165,200,.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.ititle{font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px}
+.idesc{font-size:12px;color:var(--muted);line-height:1.5}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:10px 0}
+.tag{padding:4px 11px;border-radius:100px;font-size:11px;font-weight:500;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);color:var(--text)}
+.tag.t{background:rgba(14,165,200,.1);border-color:rgba(14,165,200,.25);color:var(--teal2)}
+.tag.g{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.2);color:#4ade80}
+.tag.r{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);color:#f87171}
+.tag.a{background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.25);color:var(--accent)}
+.tw{overflow-x:auto;border-radius:11px;border:1px solid var(--border);margin:16px 0}
+table{width:100%;border-collapse:collapse;min-width:460px}
+thead tr{background:rgba(14,165,200,.08)}
+th{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--teal);padding:12px 14px;text-align:left;border-bottom:1px solid var(--border)}
+td{padding:12px 14px;font-size:12px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr.hr td{background:rgba(14,165,200,.05);color:var(--text)}
+tr.hr td.br{color:var(--teal2);font-weight:700}
+td.br{font-weight:600;color:var(--white);font-size:13px}
+.funnel{display:flex;flex-direction:column;gap:5px;margin:14px 0}
+.fr{border-radius:9px;padding:13px 16px;display:grid;grid-template-columns:26px 1fr auto;align-items:center;gap:10px}
+.fr.f1{background:rgba(14,165,200,.22);border-left:3px solid var(--teal)}
+.fr.f2{background:rgba(14,165,200,.15);border-left:3px solid rgba(14,165,200,.7)}
+.fr.f3{background:rgba(14,165,200,.09);border-left:3px solid rgba(14,165,200,.5)}
+.fr.f4{background:rgba(14,165,200,.05);border-left:3px solid rgba(14,165,200,.3)}
+.fl{font-family:'Syne',sans-serif;font-size:15px;font-weight:800;color:var(--white)}
+.fn{font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px}
+.fd{font-size:11px;color:var(--muted)}
+.fk{font-size:11px;color:var(--teal2);text-align:right;white-space:nowrap}
+.tl{display:flex;flex-direction:column;gap:0;margin:16px 0;position:relative}
+.tl::before{content:'';position:absolute;left:18px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.07)}
+.tli{display:flex;gap:18px;padding-bottom:22px;position:relative}
+.tli:last-child{padding-bottom:0}
+.tld{width:38px;height:38px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:11px;font-weight:800;position:relative;z-index:1}
+.tld.d1{background:var(--teal);color:var(--dark)}
+.tld.d2{background:rgba(14,165,200,.6);color:var(--dark)}
+.tld.d3{background:var(--accent);color:var(--dark)}
+.tld.d4{background:rgba(14,165,200,.3);color:var(--white)}
+.tlb{flex:1;padding-top:7px}
+.tldt{font-size:11px;color:var(--teal);font-weight:600;letter-spacing:.06em;margin-bottom:3px;text-transform:uppercase}
+.tln{font-size:15px;font-weight:600;color:var(--white);margin-bottom:5px}
+.tlbg{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--teal2);margin-bottom:7px}
+.tlk{font-size:12px;color:var(--muted);line-height:1.6}
+.tlk strong{color:var(--text)}
+.pg{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.pc{display:flex;align-items:flex-start;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:14px 16px;transition:border-color .2s}
+.pc:hover{border-color:rgba(14,165,200,.3)}
+.pn{font-family:'Syne',sans-serif;font-size:12px;font-weight:800;color:var(--teal);width:22px;flex-shrink:0;padding-top:1px}
+.pname{font-size:13px;font-weight:600;color:var(--white);margin-bottom:2px}
+.pdesc{font-size:12px;color:var(--muted);line-height:1.5}
+.ch{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:9px;padding:12px 16px;margin-bottom:7px}
+.chi{width:34px;height:34px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.chn{font-size:13px;font-weight:600;color:var(--white);flex:1}
+.chf{font-size:11px;color:var(--muted);margin-right:10px}
+.chr{font-size:11px;font-weight:600;color:var(--teal2)}
+.kv{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.kv:last-child{border-bottom:none;padding-bottom:0}
+.kvl{font-size:13px;color:var(--muted)}
+.kvv{font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:var(--teal2)}
+.dvd{height:1px;background:var(--border);margin:28px 0}
+.gap{margin-top:20px}
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(7,17,28,0.95);backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 20px;z-index:100;gap:10px;
+}
+.bn{
+  display:flex;align-items:center;gap:7px;
+  background:none;border:1px solid var(--border);
+  color:var(--text);font-family:'Inter',sans-serif;font-size:13px;font-weight:500;
+  padding:9px 16px;border-radius:8px;cursor:pointer;
+  transition:border-color .2s,color .2s,background .2s;flex-shrink:0;
+}
+.bn:hover{border-color:rgba(14,165,200,.4);color:var(--white);background:rgba(14,165,200,.06)}
+.bn:disabled{opacity:.25;cursor:not-allowed}
+.bn.p{background:var(--teal);border-color:var(--teal);color:var(--dark);font-weight:600}
+.bn.p:hover{background:var(--teal2);border-color:var(--teal2)}
+.pc-info{font-size:11px;color:var(--muted);text-align:center;flex:1;min-width:0}
+.pc-info strong{color:var(--white);display:block;font-size:12px;margin-bottom:2px}
+@media(max-width:600px){
+  .two{grid-template-columns:1fr}
+  .nav-pages{display:none}
+  .page-inner{padding:28px 14px 96px}
+  .stats{grid-template-columns:1fr 1fr}
+  .fr{grid-template-columns:26px 1fr}
+  .fk{display:none}
+  .bottom-nav{padding:8px 14px}
+  .bn{font-size:12px;padding:8px 12px}
+  .chf{display:none}
+  table{min-width:360px}
+  th,td{padding:10px 10px}
+  .meta-row{gap:8px}
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<section class="hero">
-  <div class="hero-bg-glow"></div>
+<nav>
+  <div class="nav-logo" onclick="goTo(0)">Bee<span>Alp</span></div>
+  <div class="nav-pages" id="navPages"></div>
+  <div class="progress-dots" id="progressDots"></div>
+</nav>
 
-  <div class="hero-left">
-    <div class="badge"><div class="badge-dot"></div> Marketing Case Study · 2026</div>
-    <div class="role-chip">📋 Real project · Early-stage startup</div>
-
-    <h1 class="hero-title">
-      BeeAlp
-      <span>Go-To-Market</span>
-    </h1>
-
-    <p class="hero-desc">
-      Built the complete marketing and crowdfunding strategy for BeeAlp — a circular premium smartphone subscription startup entering the European market. Covered market research, competitive positioning, content pillars, social media strategy, and a phased crowdfunding roadmap.
-    </p>
-
-    <div class="hero-meta">
-      <div class="meta-item">
-        <label>Industry</label>
-        <strong>Circular Tech / Smartphones</strong>
-      </div>
-      <div class="meta-item">
-        <label>Markets</label>
-        <strong>France · Germany · UK</strong>
-      </div>
-      <div class="meta-item">
-        <label>Type</label>
-        <strong>IMC + Crowdfunding Strategy</strong>
-      </div>
+<!-- PAGE 0 — COVER -->
+<div class="page active" id="page-0">
+  <div class="page-inner">
+    <div class="hero-badge"><div class="bdot"></div>Real Project · Early-Stage Startup · 2026</div>
+    <h1 class="hero-title">BeeAlp<span class="sub">Marketing Case Study</span></h1>
+    <p class="hero-desc">Built the complete go-to-market and crowdfunding strategy for BeeAlp — a circular premium smartphone subscription startup entering France, Germany and the UK.</p>
+    <div class="meta-row">
+      <div class="meta-chip"><label>My Role</label><strong>IMC Strategy</strong></div>
+      <div class="meta-chip"><label>Markets</label><strong>FR · DE · UK</strong></div>
+      <div class="meta-chip"><label>Deliverable</label><strong>Strategy + Content + Crowdfunding</strong></div>
+      <div class="meta-chip"><label>Year</label><strong>2026</strong></div>
     </div>
-  </div>
-
-  <div class="hero-right">
-    <div class="hero-grid-bg"></div>
-    <div class="phone-mockup-container">
-      <!-- SVG Phone Mockup drawn with BeeAlp branding -->
-      <svg viewBox="0 0 280 560" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-phone">
-        <rect x="8" y="8" width="264" height="544" rx="40" fill="#1a2d3f" stroke="#0EA5C8" stroke-width="1.5"/>
-        <rect x="16" y="16" width="248" height="528" rx="34" fill="#0D1B2A"/>
-        <!-- Camera bump -->
-        <rect x="70" y="40" width="140" height="140" rx="30" fill="#132237" stroke="#0EA5C8" stroke-width="1"/>
-        <circle cx="108" cy="90" r="28" fill="#0D1B2A" stroke="#0EA5C8" stroke-width="1.5"/>
-        <circle cx="108" cy="90" r="16" fill="#070F18"/>
-        <circle cx="108" cy="90" r="6" fill="#0EA5C8" opacity="0.5"/>
-        <circle cx="172" cy="90" r="22" fill="#0D1B2A" stroke="#0EA5C8" stroke-width="1.5"/>
-        <circle cx="172" cy="90" r="12" fill="#070F18"/>
-        <circle cx="172" cy="90" r="4" fill="#0EA5C8" opacity="0.5"/>
-        <!-- Flash -->
-        <rect x="102" y="148" width="16" height="16" rx="4" fill="#F5C842" opacity="0.8"/>
-        <!-- Screen content area -->
-        <rect x="20" y="210" width="240" height="330" rx="16" fill="#132237"/>
-        <!-- BeeAlp logo area -->
-        <text x="140" y="260" text-anchor="middle" fill="#0EA5C8" font-size="11" font-family="sans-serif" font-weight="bold" letter-spacing="2">BEEALP</text>
-        <!-- Subscription card -->
-        <rect x="36" y="280" width="208" height="70" rx="12" fill="#0EA5C8" opacity="0.15"/>
-        <rect x="36" y="280" width="208" height="70" rx="12" stroke="#0EA5C8" stroke-width="1" opacity="0.4"/>
-        <text x="54" y="308" fill="#E8EDF2" font-size="9" font-family="sans-serif">Monthly fee · Year 1</text>
-        <text x="54" y="328" fill="#0EA5C8" font-size="22" font-family="sans-serif" font-weight="bold">€24.99</text>
-        <text x="180" y="328" fill="#7A94AA" font-size="8" font-family="sans-serif">/month</text>
-        <!-- Stats bars -->
-        <rect x="36" y="370" width="208" height="6" rx="3" fill="#1a2d3f"/>
-        <rect x="36" y="370" width="160" height="6" rx="3" fill="#0EA5C8"/>
-        <text x="36" y="394" fill="#7A94AA" font-size="8" font-family="sans-serif">8-year lifecycle commitment</text>
-        <rect x="36" y="408" width="208" height="6" rx="3" fill="#1a2d3f"/>
-        <rect x="36" y="408" width="100" height="6" rx="3" fill="#F5C842"/>
-        <text x="36" y="432" fill="#7A94AA" font-size="8" font-family="sans-serif">European data sovereignty</text>
-        <!-- Side button -->
-        <rect x="272" y="180" width="6" height="60" rx="3" fill="#1a2d3f"/>
-        <!-- Red accent dot (brand) -->
-        <circle cx="260" cy="540" r="5" fill="#e85555"/>
-      </svg>
+    <div class="idx-title">📋 Contents — click any section to jump directly</div>
+    <div class="idx-grid">
+      <div class="idx-item" onclick="goTo(1)"><div class="idx-num">1</div><div class="idx-info"><div class="idx-name">The Problem & Market Opportunity</div><div class="idx-desc">Market size · pain points · why now</div></div><div class="idx-arr">→</div></div>
+      <div class="idx-item" onclick="goTo(2)"><div class="idx-num">2</div><div class="idx-info"><div class="idx-name">Competitive Landscape</div><div class="idx-desc">6 competitors mapped · white space identified</div></div><div class="idx-arr">→</div></div>
+      <div class="idx-item" onclick="goTo(3)"><div class="idx-num">3</div><div class="idx-info"><div class="idx-name">Target Audience & Positioning</div><div class="idx-desc">3-phase segmentation · value proposition · pricing</div></div><div class="idx-arr">→</div></div>
+      <div class="idx-item" onclick="goTo(4)"><div class="idx-num">4</div><div class="idx-info"><div class="idx-name">Content & Social Media Strategy</div><div class="idx-desc">5 content pillars · AIDA funnel · channel plan</div></div><div class="idx-arr">→</div></div>
+      <div class="idx-item" onclick="goTo(5)"><div class="idx-num">5</div><div class="idx-info"><div class="idx-name">Crowdfunding Campaign Plan</div><div class="idx-desc">Phase roadmap · budget · KPI gates</div></div><div class="idx-arr">→</div></div>
+      <div class="idx-item" onclick="goTo(6)"><div class="idx-num">6</div><div class="idx-info"><div class="idx-name">Growth: UGC, Referral & B2B</div><div class="idx-desc">Community engine · referral system · corporate channel</div></div><div class="idx-arr">→</div></div>
+      <div class="idx-item" onclick="goTo(7)"><div class="idx-num">7</div><div class="idx-info"><div class="idx-name">KPIs & Financial Model</div><div class="idx-desc">Success metrics · LTV · unit economics</div></div><div class="idx-arr">→</div></div>
     </div>
-  </div>
-</section>
-
-<!-- ═══════════════════ STATS BAR ═══════════════════ -->
-<div class="stats-bar">
-  <div class="stat-item reveal">
-    <div class="stat-num">642M</div>
-    <div class="stat-label">Unused smartphones in EU households</div>
-  </div>
-  <div class="stat-item reveal reveal-delay-1">
-    <div class="stat-num">€925</div>
-    <div class="stat-label">Customer lifetime value over 8 years</div>
-  </div>
-  <div class="stat-item reveal reveal-delay-2">
-    <div class="stat-num">55%</div>
-    <div class="stat-label">Europeans willing to buy refurbished</div>
-  </div>
-  <div class="stat-item reveal reveal-delay-3">
-    <div class="stat-num">€500K</div>
-    <div class="stat-label">Crowdfunding target · Sept 2026</div>
   </div>
 </div>
 
-<div class="divider"></div>
+<!-- PAGE 1 — PROBLEM -->
+<div class="page" id="page-1">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">1</div>The Problem & Market Opportunity</div>
+      <h1 class="pg-title">A saturated market with an overlooked opening</h1>
+      <p class="pg-sub">The European smartphone market is 85%+ penetrated. Sales aren't driven by new users — they're driven by people forced to replace broken or slow phones.</p>
+    </div>
 
-<!-- ═══════════════════ PROBLEM ═══════════════════ -->
-<section class="problem">
-  <div class="reveal">
-    <p class="section-eyebrow">The Problem We Solved</p>
-    <h2 class="section-title">A crowded category with a trust gap</h2>
-    <p class="section-sub">
-      BeeAlp's core challenge was entering a 85%+ saturated smartphone market dominated by Apple and Samsung — and building rapid brand trust as a newcomer with zero awareness.
-    </p>
-    <br><br>
-    <p class="section-sub">
-      Consumer replacement is driven by <strong style="color:var(--white)">battery degradation and performance drops</strong>, not genuine desire for new devices — creating a perfect opening for a circular subscription model.
-    </p>
-  </div>
+    <div class="sec">Key numbers</div>
+    <div class="stats">
+      <div class="sbox"><div class="n">642M</div><div class="l">Unused smartphones in EU homes</div></div>
+      <div class="sbox"><div class="n">85%+</div><div class="l">Market penetration in Western Europe</div></div>
+      <div class="sbox"><div class="n">2.8 yrs</div><div class="l">Average replacement cycle</div></div>
+      <div class="sbox"><div class="n">55%</div><div class="l">Europeans open to refurbished</div></div>
+    </div>
 
-  <div class="reveal reveal-delay-2">
-    <div class="problem-visual">
-      <div class="problem-stat">85%<span>+</span></div>
-      <div class="problem-text">Market penetration in Western Europe. Growth only comes from replacement cycles — not new users.</div>
-      <div class="mini-stats">
-        <div class="mini-stat">
-          <div class="mini-stat-num">2.8 yrs</div>
-          <div class="mini-stat-label">Avg replacement cycle</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-num">32%</div>
-          <div class="mini-stat-label">Replace due to battery</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-num">28%</div>
-          <div class="mini-stat-label">Replace due to slowdown</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-num">&lt;5%</div>
-          <div class="mini-stat-label">Subscription adopters today</div>
-        </div>
-      </div>
+    <div class="dvd"></div>
+    <div class="sec">Why people replace phones (not because they want to)</div>
+    <div class="items">
+      <div class="item"><div class="iico">🔋</div><div><div class="ititle">Battery degradation — 32% of replacements</div><div class="idesc">The #1 reason. Worn-out battery → forced replacement. This is fixable — not an upgrade trigger.</div></div></div>
+      <div class="item"><div class="iico">🐌</div><div><div class="ititle">Performance slowdown — 28% of replacements</div><div class="idesc">Phones slow down because OS updates aren't optimised for older hardware. Solvable with long-term software support.</div></div></div>
+      <div class="item"><div class="iico">💸</div><div><div class="ititle">Repair costs often exceed device value</div><div class="idesc">€200 repair bill on a 2-year-old phone → consumers replace instead. An all-inclusive model removes this entirely.</div></div></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">The opportunity we identified</div>
+    <div class="hl"><p>The <strong>subscription segment is under 5% today but growing fast</strong> — and no player combines flagship performance + circular model + European data sovereignty. That's the gap BeeAlp owns.</p></div>
+
+    <div class="two gap">
+      <div class="card"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">Opportunity 1</div><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:5px">Refurbished market growing 10–15%/yr</div><div style="font-size:12px;color:var(--muted);line-height:1.6">Over half of Europeans are open to certified refurbished. BeeAlp's circular loop feeds this demand directly.</div></div>
+      <div class="card"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px">Opportunity 2</div><div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:5px">EU circular economy regulation tailwind</div><div style="font-size:12px;color:var(--muted);line-height:1.6">New EU right-to-repair laws and circular economy directives actively favour BeeAlp's model over incumbents.</div></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Strategic implications for marketing</div>
+    <div class="items">
+      <div class="item"><div class="iico">💡</div><div><div class="ititle">Lead with performance, not sustainability</div><div class="idesc">Research showed trust attributes (reliability, value, authenticity) drive adoption more than eco-claims. Sustainability is a proof point — not the hook.</div></div></div>
+      <div class="item"><div class="iico">🎯</div><div><div class="ititle">Frame subscription as ownership, not rental</div><div class="idesc">Consumer resistance is psychological. The strategy reframes it: declining monthly cost + personalised OS = full ownership experience.</div></div></div>
+      <div class="item"><div class="iico">🇩🇪</div><div><div class="ititle">Launch in Germany first</div><div class="idesc">Data shows Germany forms trust faster and converts earlier than the UK for this category. France follows. UK is phase 3.</div></div></div>
     </div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
+<!-- PAGE 2 — COMPETITION -->
+<div class="page" id="page-2">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">2</div>Competitive Landscape</div>
+      <h1 class="pg-title">6 competitors mapped. One clear white space.</h1>
+      <p class="pg-sub">We analysed every major player in premium smartphones, refurbished, and device-as-a-service to find where BeeAlp could own a defensible position.</p>
+    </div>
 
-<!-- ═══════════════════ STRATEGY ═══════════════════ -->
-<section class="strategy">
-  <div class="reveal">
-    <p class="section-eyebrow">Our Strategic Work</p>
-    <h2 class="section-title">What we built for BeeAlp</h2>
-    <p class="section-sub">A full integrated marketing communications strategy — from market intelligence through to a phased crowdfunding roadmap and social content system.</p>
-  </div>
+    <div class="sec">Competitive matrix</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Brand</th><th>Model</th><th>Price</th><th>Strength</th><th>Weakness</th></tr></thead>
+        <tbody>
+          <tr><td class="br">Apple</td><td>Ownership</td><td>€900–1,500+</td><td>Ecosystem, loyalty</td><td>High TCO, planned obsolescence</td></tr>
+          <tr><td class="br">Samsung</td><td>Ownership</td><td>€900–1,400</td><td>Display, Android</td><td>Rapid depreciation, bloat</td></tr>
+          <tr><td class="br">Fairphone</td><td>Ownership</td><td>€500–700</td><td>Repairability, ethics</td><td>Mid-range specs, ~2% share</td></tr>
+          <tr><td class="br">Back Market</td><td>Marketplace</td><td>€300–800</td><td>Low price, sustainability</td><td>Variable quality, no brand</td></tr>
+          <tr><td class="br">Grover</td><td>Rental</td><td>Monthly</td><td>Flexibility, selection</td><td>High long-term cost, no ownership</td></tr>
+          <tr class="hr"><td class="br">BeeAlp ✦</td><td>Subscription</td><td>€24.99→€4.99/mo</td><td>Circular + Premium + Sovereignty</td><td>New brand, trust gap to close</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-  <div class="strategy-grid">
-    <div class="strategy-card reveal reveal-delay-1">
-      <div class="card-number">01 · RESEARCH</div>
-      <div class="card-icon">📊</div>
-      <div class="card-title">Market & Competitive Analysis</div>
-      <div class="card-body">Mapped 6 competitors (Apple, Samsung, Fairphone, Back Market, Commown, Grover) and identified a white space: no player integrates flagship performance + circular model + European sovereignty.</div>
+    <div class="hl"><p><strong>Key finding:</strong> No competitor integrates all three — flagship performance, a circular subscription, and European data sovereignty. BeeAlp is first-mover in this combination.</p></div>
+
+    <div class="dvd"></div>
+    <div class="sec">Most relevant competitor — Fairphone</div>
+    <div class="card">
+      <div class="two">
+        <div><div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:7px">What they do right</div><div class="tags"><span class="tag g">Modular repairability</span><span class="tag g">Ethical supply chain</span><span class="tag g">10/10 iFixit score</span></div></div>
+        <div><div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:7px">Where they fail</div><div class="tags"><span class="tag r">Only ~2% market share</span><span class="tag r">Mid-range specs</span><span class="tag r">Fairphone Easy failed</span></div></div>
+      </div>
+      <div style="margin-top:14px;font-size:12px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:12px"><strong style="color:var(--white)">BeeAlp's edge:</strong> Same sustainability mission, but with flagship Snapdragon 8 Elite performance, premium design, and a subscription that makes it financially accessible — removing every reason to compromise.</div>
     </div>
-    <div class="strategy-card reveal reveal-delay-2">
-      <div class="card-number">02 · POSITIONING</div>
-      <div class="card-icon">🎯</div>
-      <div class="card-title">Targeting & Value Proposition</div>
-      <div class="card-body">Phased targeting across 3 cohorts: Gen Z/Millennials (18–38) in years 1–3, Gen X (39–55) in years 4–6, then late majority switchers. Core promise: "The Never-Ending Premium Smartphone."</div>
-    </div>
-    <div class="strategy-card reveal reveal-delay-3">
-      <div class="card-number">03 · CONTENT</div>
-      <div class="card-icon">📱</div>
-      <div class="card-title">Social Media & Content Strategy</div>
-      <div class="card-body">Built a full AIDA-funnel content system across LinkedIn, Instagram, X, Discord, and newsletters — with 5 content pillars, tone-of-voice guidelines, and a €45K social media budget plan.</div>
-    </div>
-    <div class="strategy-card reveal reveal-delay-1">
-      <div class="card-number">04 · CROWDFUNDING</div>
-      <div class="card-icon">🚀</div>
-      <div class="card-title">Crowdfunding Campaign Strategy</div>
-      <div class="card-body">Designed the full September 2026 crowdfunding campaign: 30,000 warm contact waitlist, Day 1 target of 40% funding (€200K), pop-up demos in 3 cities, and influencer micro-network activation.</div>
-    </div>
-    <div class="strategy-card reveal reveal-delay-2">
-      <div class="card-number">05 · COMMUNITY</div>
-      <div class="card-icon">🤝</div>
-      <div class="card-title">UGC & Referral System</div>
-      <div class="card-body">Designed an always-on referral program with "Continuity Benefits" (priority support, early OS access) instead of cash discounts — to protect premium brand perception while driving organic growth.</div>
-    </div>
-    <div class="strategy-card reveal reveal-delay-3">
-      <div class="card-number">06 · B2B</div>
-      <div class="card-icon">🏢</div>
-      <div class="card-title">B2B Corporate Channel</div>
-      <div class="card-body">Identified that ~28% of EU companies provide mobile devices to employees. Developed corporate kit strategy targeting HR/IT directors via MEDDIC sales qualification — for bulk deployments and lower CAC.</div>
+
+    <div class="dvd"></div>
+    <div class="sec">Opportunity against each player</div>
+    <div class="items">
+      <div class="item"><div class="iico">🍎</div><div><div class="ititle">vs. Apple & Samsung</div><div class="idesc">Premium feel with dramatically lower TCO. The 8-year subscription costs €925 total vs. €1,800+ for two Samsung replacements.</div></div></div>
+      <div class="item"><div class="iico">♻️</div><div><div class="ititle">vs. Back Market</div><div class="idesc">Replace the "quality lottery" with a guaranteed, consistent new-like experience — removing the "used phone" stigma through circular ownership.</div></div></div>
+      <div class="item"><div class="iico">🔄</div><div><div class="ititle">vs. Grover (rental)</div><div class="idesc">As manufacturer AND service provider, BeeAlp offers better hardware integration and lower long-term costs than any generic rental platform.</div></div></div>
     </div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
+<!-- PAGE 3 — TARGETING -->
+<div class="page" id="page-3">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">3</div>Target Audience & Positioning</div>
+      <h1 class="pg-title">3-phase audience strategy over 8 years</h1>
+      <p class="pg-sub">A phased adoption curve — starting with the most receptive early adopters and expanding outward as trust and price make it accessible to all.</p>
+    </div>
 
-<!-- ═══════════════════ CONTENT PILLARS ═══════════════════ -->
-<section class="pillars">
-  <div class="reveal">
-    <p class="section-eyebrow">Content Strategy</p>
-    <h2 class="section-title">5 Content Pillars That Drive the Narrative</h2>
-    <p class="section-sub">Every piece of content maps to one of these pillars — creating a coherent brand story without ever sounding preachy about sustainability.</p>
-  </div>
-
-  <div class="pillars-layout">
-    <div class="pillar-list">
-      <div class="pillar-item reveal reveal-delay-1">
-        <div class="pillar-icon teal">⚡</div>
-        <div>
-          <div class="pillar-name">Premium Continuity</div>
-          <div class="pillar-desc">Performance over time. "Year 3 and still fast" — proving the device doesn't slow down, backed by 8-year software support data.</div>
+    <div class="sec">Audience by phase</div>
+    <div class="tl">
+      <div class="tli">
+        <div class="tld d1">Y1–3</div>
+        <div class="tlb">
+          <div class="tldt">Years 1–3</div>
+          <div class="tln">Gen Z & Millennials (18–38)</div>
+          <div class="tlk">Early adopters — most open to subscriptions, most vocal on social, most likely to create content and refer friends.</div>
+          <div class="tags" style="margin-top:9px"><span class="tag t">Flagship performance</span><span class="tag t">Anti-obsolescence values</span><span class="tag t">Subscription-native</span><span class="tag t">High content creation</span></div>
         </div>
       </div>
-      <div class="pillar-item reveal reveal-delay-2">
-        <div class="pillar-icon gold">👤</div>
-        <div>
-          <div class="pillar-name">Phone as Mine</div>
-          <div class="pillar-desc">OS personalisation + MyBee Profile UGC. Shifting perception from "phone as a service" to "this phone is mine" — building emotional attachment.</div>
+      <div class="tli">
+        <div class="tld d2">Y4–6</div>
+        <div class="tlb">
+          <div class="tldt">Years 4–6</div>
+          <div class="tln">Generation X (39–55)</div>
+          <div class="tlk">Once trust is established, Gen X converts on reliability, total cost of ownership, and declining price logic.</div>
+          <div class="tags" style="margin-top:9px"><span class="tag">Total cost of ownership</span><span class="tag">Reliability & service</span><span class="tag">Referral-driven</span></div>
         </div>
       </div>
-      <div class="pillar-item reveal reveal-delay-3">
-        <div class="pillar-icon green">🛡️</div>
-        <div>
-          <div class="pillar-name">Care Included</div>
-          <div class="pillar-desc">Repair and replacement clarity. When something goes wrong, BeeAlp handles it — removing downside risk and surprise costs consumers dread.</div>
-        </div>
-      </div>
-      <div class="pillar-item reveal reveal-delay-1">
-        <div class="pillar-icon purple">💶</div>
-        <div>
-          <div class="pillar-name">Smart Economics</div>
-          <div class="pillar-desc">Predictable, declining cost vs. the €900+ upgrade cycle. Subscription isn't debt — it's total cost of ownership that shrinks every year you stay.</div>
-        </div>
-      </div>
-      <div class="pillar-item reveal reveal-delay-2">
-        <div class="pillar-icon red">♻️</div>
-        <div>
-          <div class="pillar-name">Circular Proof</div>
-          <div class="pillar-desc">Lifecycle transparency without greenwashing. Factual, non-preachy sustainability — showing the circular loop with real data, not empty claims.</div>
+      <div class="tli">
+        <div class="tld d3">Y7+</div>
+        <div class="tlb">
+          <div class="tldt">Year 7+</div>
+          <div class="tln">Late Majority & Switchers</div>
+          <div class="tlk">Structured switching incentives, family/colleague migration. At this point it's €4.99/mo — lowest friction possible.</div>
+          <div class="tags" style="margin-top:9px"><span class="tag">Family migration</span><span class="tag">Referral rewards</span><span class="tag">Activation-fee discounts</span></div>
         </div>
       </div>
     </div>
 
-    <!-- AIDA Funnel Visual -->
-    <div class="funnel-visual reveal reveal-delay-2">
-      <div class="funnel-title">
-        <span>📐</span> AIDA Social Funnel
-      </div>
-      <div class="funnel-steps">
-        <div class="funnel-step a">
-          <div>
-            <div class="funnel-label">A · Awareness</div>
-            <div class="funnel-objective">Circular economy posts, founder story, sovereignty debate</div>
-          </div>
-          <div class="funnel-platform">LinkedIn · Instagram · X<br>3–4×/week</div>
-        </div>
-        <div class="funnel-step i">
-          <div>
-            <div class="funnel-label">I · Interest</div>
-            <div class="funnel-objective">Explainer videos, lifecycle breakdown, cost comparison</div>
-          </div>
-          <div class="funnel-platform">LinkedIn · Newsletter<br>3–4×/week</div>
-        </div>
-        <div class="funnel-step d">
-          <div>
-            <div class="funnel-label">D · Desire</div>
-            <div class="funnel-objective">Prototype reveal, testimonials, voting polls</div>
-          </div>
-          <div class="funnel-platform">Instagram · Discord<br>4×/week</div>
-        </div>
-        <div class="funnel-step act">
-          <div>
-            <div class="funnel-label">A · Action</div>
-            <div class="funnel-objective">Crowdfunding launch, early-bird offers, roadmap</div>
-          </div>
-          <div class="funnel-platform">All channels<br>Daily @ launch</div>
-        </div>
-      </div>
-      <div class="funnel-kpi-bar">
-        <div class="kpi-row">
-          <span class="kpi-label">Awareness KPI</span>
-          <span class="kpi-badge">Reach + Email signups</span>
-        </div>
-        <div class="kpi-row">
-          <span class="kpi-label">Interest KPI</span>
-          <span class="kpi-badge">Engagement rate + Time on site</span>
-        </div>
-        <div class="kpi-row">
-          <span class="kpi-label">Desire KPI</span>
-          <span class="kpi-badge">Waitlist growth</span>
-        </div>
-        <div class="kpi-row" style="margin-bottom:0">
-          <span class="kpi-label">Action KPI</span>
-          <span class="kpi-badge">Conversion rate + Funds raised</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="dvd"></div>
+    <div class="sec">Core value proposition</div>
+    <div class="hl"><p style="font-size:15px;font-weight:600;color:var(--white);margin-bottom:6px">"The Never-Ending Premium Smartphone"</p><p>A phone that stays fast, costs less over time, is always protected, and feels completely yours — delivered through a circular subscription that rewards loyalty.</p></div>
 
-<div class="divider"></div>
-
-<!-- ═══════════════════ CROWDFUNDING CAMPAIGN ═══════════════════ -->
-<section class="campaign">
-  <div class="reveal">
-    <p class="section-eyebrow">Campaign Architecture</p>
-    <h2 class="section-title">Phased Crowdfunding Roadmap</h2>
-    <p class="section-sub">A gate-based funding structure reducing financial exposure — each phase unlocking the next only when KPIs are met.</p>
-  </div>
-
-  <div class="timeline-container reveal reveal-delay-1">
-    <div class="timeline-line"><div class="timeline-progress"></div></div>
-    <div class="timeline-phases">
-
-      <div class="phase-col">
-        <div class="phase-dot p1">P1</div>
-        <div class="phase-card">
-          <div class="phase-date">Now → May 2026</div>
-          <div class="phase-name">Pre-Seed Foundation</div>
-          <div class="phase-budget">€1.5M</div>
-          <div class="phase-kpi">
-            <strong>KPI:</strong> 5,000+ email opt-ins across FR/DE/UK · CTR ≥2% · Brand identity live
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-col">
-        <div class="phase-dot p2">P2</div>
-        <div class="phase-card">
-          <div class="phase-date">Jun → Aug 2026</div>
-          <div class="phase-name">Pre-Campaign Warm-up</div>
-          <div class="phase-budget">€3.5M</div>
-          <div class="phase-kpi">
-            <strong>KPI:</strong> 30,000 warm contacts · CE certification · D2C platform live · B2B pilot signed
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-col">
-        <div class="phase-dot p3">🚀</div>
-        <div class="phase-card" style="border-color: rgba(245,200,66,0.3);">
-          <div class="phase-date" style="color:var(--accent)">September 2026</div>
-          <div class="phase-name">Crowdfunding Launch</div>
-          <div class="phase-budget" style="color:var(--accent)">€500K target</div>
-          <div class="phase-kpi">
-            <strong>KPI:</strong> 2,000+ backers · 40% funded on Day 1 · Pop-up demos in 3 cities
-          </div>
-        </div>
-      </div>
-
-      <div class="phase-col">
-        <div class="phase-dot p4">P3</div>
-        <div class="phase-card">
-          <div class="phase-date">2027+</div>
-          <div class="phase-name">Series A Scale</div>
-          <div class="phase-budget">€20M</div>
-          <div class="phase-kpi">
-            <strong>KPI:</strong> 50K–100K subscribers · CAC ≤€122 · Churn &lt;2% · NPS &gt;60
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════ COMPETITIVE ═══════════════════ -->
-<section class="competitive">
-  <div class="reveal">
-    <p class="section-eyebrow">Competitive Intelligence</p>
-    <h2 class="section-title">Finding the White Space</h2>
-    <p class="section-sub">Mapped 5 major competitors to identify where BeeAlp could own a unique position — the only player combining premium, circular, and sovereignty.</p>
-  </div>
-
-  <div class="comp-table-wrap reveal reveal-delay-1">
-    <table class="comp-table">
-      <thead>
-        <tr>
-          <th>Brand</th>
-          <th>Model</th>
-          <th>Price Point</th>
-          <th>Key Strength</th>
-          <th>Key Gap</th>
-          <th>BeeAlp Opportunity</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="brand">Apple</td>
-          <td>Ownership</td>
-          <td>€900–1,500+</td>
-          <td>Ecosystem lock-in, brand loyalty</td>
-          <td>High TCO, planned obsolescence</td>
-          <td><span class="tag teal">Lower TCO + better service</span></td>
-        </tr>
-        <tr>
-          <td class="brand">Samsung</td>
-          <td>Ownership</td>
-          <td>€900–1,400</td>
-          <td>Display tech, Android ecosystem</td>
-          <td>Rapid depreciation, bloated OS</td>
-          <td><span class="tag teal">Capture 2yr upgrade fatigue</span></td>
-        </tr>
-        <tr>
-          <td class="brand">Fairphone</td>
-          <td>Ownership</td>
-          <td>€500–700</td>
-          <td>Repairability, ethical sourcing</td>
-          <td>Mid-range specs, niche appeal, ~2% share</td>
-          <td><span class="tag green">Sustainability + flagship power</span></td>
-        </tr>
-        <tr>
-          <td class="brand">Back Market</td>
-          <td>Marketplace</td>
-          <td>€300–800</td>
-          <td>Low price, sustainability story</td>
-          <td>Variable quality, no brand coherence</td>
-          <td><span class="tag teal">Premium "new-like" subscription</span></td>
-        </tr>
-        <tr>
-          <td class="brand">Grover</td>
-          <td>Rental</td>
-          <td>Monthly rental</td>
-          <td>Flexibility, wide selection</td>
-          <td>High long-term cost, no ownership path</td>
-          <td><span class="tag green">Manufacturer + service = better value</span></td>
-        </tr>
-        <tr class="beealp-row">
-          <td class="brand">BeeAlp</td>
-          <td>Subscription</td>
-          <td>€24.99→€4.99/mo</td>
-          <td>Circular + Premium + Sovereignty</td>
-          <td>New brand, trust building needed</td>
-          <td><span class="tag green">First-mover: integrated circular premium</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════ SOCIAL STRATEGY ═══════════════════ -->
-<section class="social">
-  <div class="reveal">
-    <p class="section-eyebrow">Social Media Execution</p>
-    <h2 class="section-title">Channel Strategy & Tone of Voice</h2>
-    <p class="section-sub">Designed a multi-platform social system with a clear tone — premium, confident, and subtly anti-planned-obsolescence. Never preachy.</p>
-  </div>
-
-  <div class="social-grid">
-    <div>
-      <p style="font-size:13px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:20px; font-weight:600;">Channels & Posting Cadence</p>
-      <div class="channels-list">
-        <div class="channel-item reveal reveal-delay-1">
-          <div class="channel-icon" style="background:rgba(225,48,108,0.15);">📸</div>
-          <div class="channel-name">Instagram</div>
-          <div class="channel-freq" style="flex:1; text-align:center;">4×/week</div>
-          <div class="channel-role">Desire + Action</div>
-        </div>
-        <div class="channel-item reveal reveal-delay-2">
-          <div class="channel-icon" style="background:rgba(10,102,194,0.15);">💼</div>
-          <div class="channel-name">LinkedIn</div>
-          <div class="channel-freq" style="flex:1; text-align:center;">3–4×/week</div>
-          <div class="channel-role">Awareness + Interest</div>
-        </div>
-        <div class="channel-item reveal reveal-delay-3">
-          <div class="channel-icon" style="background:rgba(255,255,255,0.08);">✖</div>
-          <div class="channel-name">X (Twitter)</div>
-          <div class="channel-freq" style="flex:1; text-align:center;">3–4×/week</div>
-          <div class="channel-role">Awareness + Debate</div>
-        </div>
-        <div class="channel-item reveal reveal-delay-1">
-          <div class="channel-icon" style="background:rgba(88,101,242,0.15);">🎮</div>
-          <div class="channel-name">Discord</div>
-          <div class="channel-freq" style="flex:1; text-align:center;">Daily</div>
-          <div class="channel-role">Community + UGC</div>
-        </div>
-        <div class="channel-item reveal reveal-delay-2">
-          <div class="channel-icon" style="background:rgba(245,200,66,0.15);">📧</div>
-          <div class="channel-name">Email Newsletter</div>
-          <div class="channel-freq" style="flex:1; text-align:center;">Weekly</div>
-          <div class="channel-role">Interest + Nurture</div>
-        </div>
-      </div>
-      <div style="margin-top:20px; background:var(--mid); border:1px solid rgba(255,255,255,0.06); border-radius:12px; padding:20px 24px;" class="reveal reveal-delay-3">
-        <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Total social media budget</p>
-        <p style="font-family:'Syne',sans-serif; font-size:32px; font-weight:800; color:var(--teal);">€45,000</p>
-        <p style="font-size:12px; color:var(--muted); margin-top:4px;">Allocated across 4 AIDA phases</p>
-      </div>
+    <div class="gap"></div>
+    <div class="sec">4 pillars of the value proposition</div>
+    <div class="items">
+      <div class="item"><div class="iico">⚡</div><div><div class="ititle">Performance That Lasts</div><div class="idesc">8-year software update commitment + proactive AI health management. The phone doesn't slow down — it gets better.</div></div></div>
+      <div class="item"><div class="iico">👤</div><div><div class="ititle">Personal Ownership</div><div class="idesc">Customisable OS with saved "MyBee Profile" — your preferences restore instantly across any repair or replacement.</div></div></div>
+      <div class="item"><div class="iico">🛡️</div><div><div class="ititle">Care Included</div><div class="idesc">Repair or replacement is part of the subscription. No surprise bills. BeeAlp handles it with a 48h turnaround SLA.</div></div></div>
+      <div class="item"><div class="iico">💶</div><div><div class="ititle">Accessible Premium</div><div class="idesc">Starts at €24.99/mo and drops every year you stay. By year 7 it's €4.99/mo — less than a streaming subscription.</div></div></div>
     </div>
 
-    <div>
-      <div class="tone-card reveal reveal-delay-2">
-        <div class="tone-title">🎙️ Tone of Voice System</div>
-        <div class="tone-tags">
-          <span class="tone-tag">Premium + Confident</span>
-          <span class="tone-tag">Transparent</span>
-          <span class="tone-tag">Clarity first</span>
-          <span class="tone-tag">Value over time</span>
-          <span class="tone-tag">Product-led cleverness</span>
-          <span class="tone-tag">Non-preachy sustainability</span>
-          <span class="tone-tag">Anti-planned obsolescence</span>
+    <div class="dvd"></div>
+    <div class="sec">Pricing model — declining monthly fee (loyalty rewarded)</div>
+    <div class="card">
+      <div class="kv"><span class="kvl">Activation fee (one-time)</span><span class="kvv">€99</span></div>
+      <div class="kv"><span class="kvl">Year 1</span><span class="kvv">€24.99/mo</span></div>
+      <div class="kv"><span class="kvl">Year 2</span><span class="kvv">€19.99/mo</span></div>
+      <div class="kv"><span class="kvl">Years 3–4</span><span class="kvv">€14.99/mo</span></div>
+      <div class="kv"><span class="kvl">Years 5–6</span><span class="kvv">€9.99/mo</span></div>
+      <div class="kv"><span class="kvl">Years 7–8</span><span class="kvv">€4.99/mo</span></div>
+      <div class="kv" style="border-top:1px solid var(--border);margin-top:6px;padding-top:6px"><span class="kvl" style="color:var(--white);font-weight:600">Total 8-year lifetime value</span><span class="kvv" style="color:var(--accent)">€925</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 4 — CONTENT & SOCIAL -->
+<div class="page" id="page-4">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">4</div>Content & Social Media Strategy</div>
+      <h1 class="pg-title">5 content pillars. One coherent story.</h1>
+      <p class="pg-sub">Every post, reel, article and email maps to one of five pillars — so BeeAlp always sounds like one brand, never scattered or preachy.</p>
+    </div>
+
+    <div class="sec">The 5 content pillars</div>
+    <div class="pg">
+      <div class="pc"><div class="pn">01</div><div><div class="pname">⚡ Premium Continuity</div><div class="pdesc">Performance over time. "Year 3 still fast." Benchmarks, speed comparisons, before/after software updates. Proves the core promise without a single sustainability claim.</div></div></div>
+      <div class="pc"><div class="pn">02</div><div><div class="pname">👤 Phone as Mine</div><div class="pdesc">OS personalisation + MyBee Profile UGC. Users share setups → organic content. Proves ownership psychology, not rental mentality.</div></div></div>
+      <div class="pc"><div class="pn">03</div><div><div class="pname">🛡️ Care Included</div><div class="pdesc">Repair and replacement proof. Real repair stories, turnaround times, zero-downtime testimonials. Shows the safety net in action.</div></div></div>
+      <div class="pc"><div class="pn">04</div><div><div class="pname">💶 Smart Economics</div><div class="pdesc">Declining cost vs. €900 upgrade cycle. Cost comparison reels, "what you paid vs. what BeeAlp costs" calculators, ownership breakdowns.</div></div></div>
+      <div class="pc"><div class="pn">05</div><div><div class="pname">♻️ Circular Proof</div><div class="pdesc">Lifecycle transparency — never greenwashing. Factory footage, refurbishment stats, component traceability. Facts without preaching.</div></div></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Tone of voice</div>
+    <div class="card">
+      <div style="font-size:13px;color:var(--text);margin-bottom:12px;line-height:1.6"><strong style="color:var(--white)">Premium, confident, transparent</strong> — with a subtle anti-planned-obsolescence stance. Never preachy about sustainability. Always led by product and value.</div>
+      <div class="tags"><span class="tag t">Clarity first</span><span class="tag t">Value over time</span><span class="tag t">Product-led cleverness</span><span class="tag t">Non-preachy sustainability</span><span class="tag">Anti-planned obsolescence</span><span class="tag">Confident, not arrogant</span></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">AIDA content funnel — what to post, where, when</div>
+    <div class="funnel">
+      <div class="fr f1"><div class="fl">A</div><div><div class="fn">Awareness — Educate & attract</div><div class="fd">Circular economy posts · founder story · sovereignty debate · 3–4×/week</div></div><div class="fk">LinkedIn · Instagram · X</div></div>
+      <div class="fr f2"><div class="fl">I</div><div><div class="fn">Interest — Prove value & credibility</div><div class="fd">Explainer videos · lifecycle breakdown · cost comparison · 3–4×/week</div></div><div class="fk">LinkedIn · Newsletter</div></div>
+      <div class="fr f3"><div class="fl">D</div><div><div class="fn">Desire — Build community & belonging</div><div class="fd">Prototype reveal · testimonials · voting polls · 4×/week</div></div><div class="fk">Instagram · Discord</div></div>
+      <div class="fr f4"><div class="fl">A</div><div><div class="fn">Action — Convert to backers</div><div class="fd">Crowdfunding launch video · early-bird offers · roadmap · daily during launch</div></div><div class="fk">All channels</div></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Channel plan</div>
+    <div class="ch"><div class="chi" style="background:rgba(225,48,108,.15)">📸</div><div class="chn">Instagram</div><div class="chf">4×/week</div><div class="chr">Desire + Action</div></div>
+    <div class="ch"><div class="chi" style="background:rgba(10,102,194,.15)">💼</div><div class="chn">LinkedIn</div><div class="chf">3–4×/week</div><div class="chr">Awareness + Interest</div></div>
+    <div class="ch"><div class="chi" style="background:rgba(255,255,255,.07)">✖</div><div class="chn">X (Twitter)</div><div class="chf">3–4×/week</div><div class="chr">Awareness + Debate</div></div>
+    <div class="ch"><div class="chi" style="background:rgba(88,101,242,.15)">🎮</div><div class="chn">Discord</div><div class="chf">Daily</div><div class="chr">Community + UGC</div></div>
+    <div class="ch"><div class="chi" style="background:rgba(245,200,66,.15)">📧</div><div class="chn">Email Newsletter</div><div class="chf">Weekly</div><div class="chr">Interest + Nurture</div></div>
+
+    <div class="hl" style="margin-top:16px"><p><strong>Total social media budget: €45,000.</strong> Paid media only scales when CTR exceeds 2% via A/B testing. If not, budget shifts to earned media and community growth.</p></div>
+
+    <div class="dvd"></div>
+    <div class="sec">Who communicates for BeeAlp</div>
+    <div class="two">
+      <div class="card"><div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px">Founders</div><div style="font-size:12px;color:var(--muted)">Authentic voice. LinkedIn authority build valued at €50K+ in media equivalence.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px">Trusted Partners</div><div style="font-size:12px;color:var(--muted)">iFixit, Cordon Group, Thales — credibility without paid ads.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px">Tech Creators</div><div style="font-size:12px;color:var(--muted)">Influencer micro-network. Paid reviews + organic seeding for reach.</div></div>
+      <div class="card"><div style="font-size:13px;font-weight:600;color:var(--white);margin-bottom:4px">Community Ambassadors</div><div style="font-size:12px;color:var(--muted)">UGC + referrals. Discord/Reddit power users who become brand advocates.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 5 — CROWDFUNDING -->
+<div class="page" id="page-5">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">5</div>Crowdfunding Campaign Plan</div>
+      <h1 class="pg-title">Gate-based roadmap. €500K target. Sept 2026.</h1>
+      <p class="pg-sub">A phased funding structure — each phase only unlocks when all KPIs are met. Reduces financial risk while scaling on validated traction.</p>
+    </div>
+
+    <div class="sec">The 4-phase roadmap</div>
+    <div class="tl">
+      <div class="tli">
+        <div class="tld d1">P1</div>
+        <div class="tlb">
+          <div class="tldt">Now → May 2026 · €1.5M</div>
+          <div class="tln">Pre-Seed: Foundation</div>
+          <div class="tlk">Build brand, test market response, validate concept. Focus: thought leadership, micro-campaigns, community seeding.</div>
+          <div class="card" style="margin-top:10px">
+            <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Gate — all must be hit to unlock Phase 2</div>
+            <div class="tags"><span class="tag t">5,000+ email opt-ins</span><span class="tag t">CTR ≥2%</span><span class="tag t">Prototype ready</span><span class="tag t">Brand identity live</span><span class="tag t">Partner contracts signed</span></div>
+          </div>
         </div>
-        <div class="actors-title">Communication Actors</div>
-        <div class="actors-grid">
-          <div class="actor-item">
-            <div class="actor-role">Founders</div>
-            <div class="actor-sub">Authentic voice · LinkedIn authority (€50K+ media value)</div>
+      </div>
+      <div class="tli">
+        <div class="tld d2">P2</div>
+        <div class="tlb">
+          <div class="tldt">Jun → Aug 2026 · €3.5M</div>
+          <div class="tln">Seed: Pre-Campaign Warm-up</div>
+          <div class="tlk">Build the audience for September launch. CE certification, D2C platform, B2B outreach, influencer activation, pop-ups in 3 cities.</div>
+          <div class="card" style="margin-top:10px">
+            <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Gate — all must be hit to unlock Phase 3</div>
+            <div class="tags"><span class="tag t">30,000+ warm contacts</span><span class="tag t">CE certification</span><span class="tag t">D2C platform live</span><span class="tag t">1 signed B2B pilot</span></div>
           </div>
-          <div class="actor-item">
-            <div class="actor-role">Trusted Partners</div>
-            <div class="actor-sub">Credibility · iFixit, Cordon Group, Thales</div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tld d3">🚀</div>
+        <div class="tlb">
+          <div class="tldt" style="color:var(--accent)">September 2026 · €500K target</div>
+          <div class="tln">Crowdfunding Campaign Launch</div>
+          <div class="tlk">30-day campaign. Day 1 target: 40% funded (€200K). PR blitz, podcast circuit, pop-up events. Daily content on all channels.</div>
+          <div class="card" style="margin-top:10px;border-color:rgba(245,200,66,.25)">
+            <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Campaign success metrics</div>
+            <div class="tags"><span class="tag a">€500K raised</span><span class="tag a">2,000+ backers</span><span class="tag a">40% funded on Day 1</span></div>
           </div>
-          <div class="actor-item">
-            <div class="actor-role">Tech Creators</div>
-            <div class="actor-sub">Reach · Influencer micro-network</div>
-          </div>
-          <div class="actor-item">
-            <div class="actor-role">Community Ambassadors</div>
-            <div class="actor-sub">UGC + Referrals · Discord/Reddit</div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tld d4">P3</div>
+        <div class="tlb">
+          <div class="tldt">2027 onwards · €20M</div>
+          <div class="tln">Series A: Commercial Scale</div>
+          <div class="tlk">Full launch in 3 EU markets. 50,000–100,000 subscribers. 76 FTEs. Telecom partnerships. Referral + student pricing. AI app v2.</div>
+          <div class="card" style="margin-top:10px">
+            <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Scale targets</div>
+            <div class="tags"><span class="tag">50–100K subscribers</span><span class="tag">CAC ≤€122</span><span class="tag">Churn &lt;2%</span><span class="tag">NPS &gt;60</span><span class="tag">80%+ device redeployment</span></div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Marketing budget breakdown (2026)</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Phase</th><th>Period</th><th>Production</th><th>Media</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><td>Foundation</td><td>Mar–May</td><td>€19,500</td><td>€7,300</td><td><strong style="color:var(--white)">€26,800</strong></td></tr>
+          <tr><td>Pre-Campaign</td><td>Jun–Aug</td><td>€30,000</td><td>€25,000</td><td><strong style="color:var(--white)">€55,000</strong></td></tr>
+          <tr><td>Campaign</td><td>September</td><td>€30,000</td><td>€45,000</td><td><strong style="color:var(--white)">€75,000</strong></td></tr>
+          <tr><td>Post-Campaign</td><td>Oct–Dec</td><td>€15,200</td><td>€6,000</td><td><strong style="color:var(--white)">€21,200</strong></td></tr>
+          <tr><td>Agency</td><td>Ongoing</td><td>€7,000</td><td>€5,000</td><td><strong style="color:var(--white)">€12,000</strong></td></tr>
+          <tr class="hr"><td><strong>Total</strong></td><td></td><td>€101,700</td><td>€88,300</td><td><strong style="color:var(--teal2);font-size:14px">€200,000</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:6px">+ €10,000 contingency reserve (5%)</div>
   </div>
-</section>
+</div>
 
-<div class="divider"></div>
+<!-- PAGE 6 — GROWTH -->
+<div class="page" id="page-6">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">6</div>Growth: UGC, Referral & B2B</div>
+      <h1 class="pg-title">Three engines that grow without paying for every subscriber</h1>
+      <p class="pg-sub">Organic growth loops — where existing subscribers bring in new ones, and corporate clients unlock bulk acquisition at lower CAC.</p>
+    </div>
 
-<!-- ═══════════════════ UGC & REFERRAL ═══════════════════ -->
-<section class="ugc">
-  <div class="reveal">
-    <p class="section-eyebrow">Growth Mechanics</p>
-    <h2 class="section-title">UGC & Community-Led Growth</h2>
-    <p class="section-sub">Designed two viral growth systems that work together — one for community identity, one for word-of-mouth acquisition.</p>
-  </div>
-
-  <div class="ugc-grid">
-    <div class="ugc-card reveal reveal-delay-1">
-      <div class="ugc-card-title">
-        <span>🐝</span> MyBee Profile — UGC Engine
-      </div>
-      <div class="ugc-card-body">
-        A saveable OS personalisation layer that transforms the phone from a commodity into a personal identity. Users share their setups, creating organic UGC and community content — while solving the psychological ownership barrier of subscription models.
-      </div>
-      <div class="benefit-list">
-        <div class="benefit-item"><div class="benefit-check">✓</div>Preferences saved across device replacements or repairs</div>
-        <div class="benefit-item"><div class="benefit-check">✓</div>Community sharing drives Instagram/Discord content naturally</div>
-        <div class="benefit-item"><div class="benefit-check">✓</div>Increases emotional attachment → reduces churn</div>
-        <div class="benefit-item"><div class="benefit-check">✓</div>Shifts framing: "Phone as a service" → "Phone as mine"</div>
+    <div class="sec">Engine 1 — MyBee Profile (UGC system)</div>
+    <div class="card">
+      <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:9px">🐝 A saveable OS personalisation layer</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px">Users set up their phone how they want — layout, apps, preferences. All saved to "MyBee Profile" and restores instantly on any new or repaired device. Solves the biggest psychological barrier to subscription phones.</div>
+      <div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:8px">Why this matters for content</div>
+      <div class="items" style="margin:0">
+        <div class="item" style="padding:11px 13px"><div class="iico" style="width:30px;height:30px;font-size:13px">📲</div><div class="idesc">Users naturally want to share their setups → organic Instagram/Discord content without asking</div></div>
+        <div class="item" style="padding:11px 13px"><div class="iico" style="width:30px;height:30px;font-size:13px">💜</div><div class="idesc">Emotional attachment increases → lower churn, higher NPS, stronger word-of-mouth</div></div>
+        <div class="item" style="padding:11px 13px"><div class="iico" style="width:30px;height:30px;font-size:13px">🔄</div><div class="idesc">Shifts "phone as a service" → "phone as mine" — removes the rental stigma entirely</div></div>
       </div>
     </div>
 
-    <div class="ugc-card reveal reveal-delay-2">
-      <div class="ugc-card-title">
-        <span>🔗</span> Referral System — Always On
+    <div class="dvd"></div>
+    <div class="sec">Engine 2 — Always-on referral system</div>
+    <div class="card">
+      <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:9px">🔗 Premium rewards, not cash discounts</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px">Cash discounts damage premium perception. Instead, referrers earn "Continuity Benefits" — service upgrades that reinforce the brand promise while reducing CAC.</div>
+      <div class="two">
+        <div style="background:rgba(14,165,200,.07);border:1px solid rgba(14,165,200,.2);border-radius:9px;padding:14px">
+          <div style="font-size:11px;font-weight:600;color:var(--teal);margin-bottom:7px;text-transform:uppercase;letter-spacing:.07em">New customer gets</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.6">Reduced activation fee → lowers entry friction without touching monthly price</div>
+        </div>
+        <div style="background:rgba(14,165,200,.07);border:1px solid rgba(14,165,200,.2);border-radius:9px;padding:14px">
+          <div style="font-size:11px;font-weight:600;color:var(--teal);margin-bottom:7px;text-transform:uppercase;letter-spacing:.07em">Referrer gets</div>
+          <div style="font-size:12px;color:var(--text);line-height:1.6">Priority support · early OS access · proactive maintenance · restoration priority</div>
+        </div>
       </div>
-      <div class="ugc-card-body">
-        An always-on referral program using "Continuity Benefits" instead of cash rewards — protecting the premium brand while driving organic subscriber growth. Messaging adapts per cohort, mechanics stay constant.
-      </div>
-      <div class="benefit-list">
-        <div class="benefit-item"><div class="benefit-check">✓</div><strong>New customer:</strong> Activation fee reduction (lower entry friction)</div>
-        <div class="benefit-item"><div class="benefit-check">✓</div><strong>Referrer:</strong> Priority support, early OS access, maintenance perks</div>
-        <div class="benefit-item"><div class="benefit-check">✓</div>Messages: "Share Your Setup" / "Premium Without Surprises" / "Switch Easy for Family"</div>
-        <div class="benefit-item"><div class="benefit-check">✓</div>No cash discounts → premium perception fully protected</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════ KPIs ═══════════════════ -->
-<section class="kpis">
-  <div class="reveal">
-    <p class="section-eyebrow">Performance Framework</p>
-    <h2 class="section-title">Gate-based KPI Targets</h2>
-    <p class="section-sub">Each phase requires all KPIs to be met before unlocking the next — reducing financial risk while scaling only on validated traction.</p>
-  </div>
-
-  <div class="kpi-grid">
-    <div class="kpi-card reveal reveal-delay-1">
-      <div class="kpi-phase">Phase 1 · Pre-Seed</div>
-      <div class="kpi-metrics">
-        <div class="kpi-metric"><span class="kpi-metric-label">Email opt-ins</span><span class="kpi-metric-val">5,000+</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Campaign conversion</span><span class="kpi-metric-val">≥1%</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">CTR threshold</span><span class="kpi-metric-val">≥2%</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Website visitors</span><span class="kpi-metric-val">500+</span></div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--border)">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:7px">Messaging adapts per cohort — mechanics stay constant:</div>
+        <div class="tags"><span class="tag">"Share Your Setup"</span><span class="tag">"Premium Without Surprises"</span><span class="tag">"Switch Easy for Family"</span></div>
       </div>
     </div>
 
-    <div class="kpi-card reveal reveal-delay-2">
-      <div class="kpi-phase">Phase 2 · Seed / Crowdfunding</div>
-      <div class="kpi-metrics">
-        <div class="kpi-metric"><span class="kpi-metric-label">Warm contact waitlist</span><span class="kpi-metric-val">30,000+</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Crowdfunding raised</span><span class="kpi-metric-val">€500K</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Day 1 target</span><span class="kpi-metric-val">40% funded</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Backers</span><span class="kpi-metric-val">2,000+</span></div>
+    <div class="dvd"></div>
+    <div class="sec">Engine 3 — B2B corporate channel</div>
+    <div class="card">
+      <div style="font-size:14px;font-weight:600;color:var(--white);margin-bottom:9px">🏢 ~28% of EU companies provide phones to employees</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px">Corporate smartphone kits — bulk deployments sold via MEDDIC qualification directly to HR/IT directors. Unlocks faster market penetration and dramatically lower CAC.</div>
+      <div class="two">
+        <div><div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:7px">Value for businesses</div><div class="tags"><span class="tag g">Predictable monthly cost</span><span class="tag g">Secure EU data</span><span class="tag g">Lifecycle control</span></div></div>
+        <div><div style="font-size:12px;font-weight:600;color:var(--white);margin-bottom:7px">Value for BeeAlp</div><div class="tags"><span class="tag t">Bulk deployments</span><span class="tag t">Lower CAC</span><span class="tag t">Recurring revenue</span></div></div>
       </div>
-    </div>
-
-    <div class="kpi-card reveal reveal-delay-3">
-      <div class="kpi-phase">Phase 3 · Series A</div>
-      <div class="kpi-metrics">
-        <div class="kpi-metric"><span class="kpi-metric-label">Active subscribers</span><span class="kpi-metric-val">50–100K</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Customer acquisition cost</span><span class="kpi-metric-val">≤€122</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">Monthly churn</span><span class="kpi-metric-val">&lt;2%</span></div>
-        <div class="kpi-metric"><span class="kpi-metric-label">NPS target</span><span class="kpi-metric-val">&gt;60</span></div>
-      </div>
+      <div class="hl" style="margin-top:14px;margin-bottom:0"><p><strong>Gate requirement:</strong> At least one signed B2B pilot before advancing to Series A — validates the channel before scaling it.</p></div>
     </div>
   </div>
+</div>
 
-  <!-- Financial summary -->
-  <div style="margin-top:40px; background:var(--mid); border:1px solid rgba(14,165,200,0.2); border-radius:16px; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:0; position:relative; overflow:hidden;" class="reveal fin-summary">
-    <div style="position:absolute; top:-1px; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--teal), var(--teal-light));"></div>
-    <div style="padding:32px 20px 32px 32px; border-right:1px solid rgba(255,255,255,0.06);">
-      <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">LTV per subscriber</div>
-      <div class="fin-num" style="font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--teal);">€925</div>
-      <div style="font-size:12px; color:var(--muted);">over 8 years</div>
+<!-- PAGE 7 — KPIs -->
+<div class="page" id="page-7">
+  <div class="page-inner">
+    <div class="pg-header">
+      <div class="pg-eyebrow"><div class="pg-eyebrow-circle">7</div>KPIs & Financial Model</div>
+      <h1 class="pg-title">Every phase has clear success metrics</h1>
+      <p class="pg-sub">No phase advances without hitting all its gates. Risk stays controlled and every euro is spent on validated traction.</p>
     </div>
-    <div style="padding:32px 20px; border-right:1px solid rgba(255,255,255,0.06);">
-      <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Gross margin</div>
-      <div class="fin-num" style="font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--teal);">37%</div>
-      <div style="font-size:12px; color:var(--muted);">at scale</div>
+
+    <div class="sec">KPI gates by phase</div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;padding:9px 14px;background:rgba(14,165,200,.08);border-radius:8px 8px 0 0;border:1px solid rgba(14,165,200,.2)">Phase 1 — Pre-Seed</div>
+      <div class="card" style="border-radius:0 0 11px 11px;border-top:none;border-color:rgba(14,165,200,.15)">
+        <div class="kv"><span class="kvl">Email opt-ins</span><span class="kvv">5,000+</span></div>
+        <div class="kv"><span class="kvl">Campaign conversion rate</span><span class="kvv">≥1%</span></div>
+        <div class="kv"><span class="kvl">CTR threshold</span><span class="kvv">≥2%</span></div>
+        <div class="kv"><span class="kvl">Website visitors</span><span class="kvv">500+</span></div>
+      </div>
     </div>
-    <div style="padding:32px 20px; border-right:1px solid rgba(255,255,255,0.06);">
-      <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">LTV:CAC ratio</div>
-      <div class="fin-num" style="font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--teal);">7.6×</div>
-      <div style="font-size:12px; color:var(--muted);">€925 / €122</div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;padding:9px 14px;background:rgba(14,165,200,.08);border-radius:8px 8px 0 0;border:1px solid rgba(14,165,200,.2)">Phase 2 — Seed / Crowdfunding</div>
+      <div class="card" style="border-radius:0 0 11px 11px;border-top:none;border-color:rgba(14,165,200,.15)">
+        <div class="kv"><span class="kvl">Warm contact waitlist</span><span class="kvv">30,000+</span></div>
+        <div class="kv"><span class="kvl">Crowdfunding raised</span><span class="kvv">€500K</span></div>
+        <div class="kv"><span class="kvl">Day 1 funding target</span><span class="kvv">40%</span></div>
+        <div class="kv"><span class="kvl">Backers</span><span class="kvv">2,000+</span></div>
+      </div>
     </div>
-    <div style="padding:32px 32px 32px 20px;">
-      <div style="font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Payback period</div>
-      <div class="fin-num" style="font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--teal);">18–24</div>
-      <div style="font-size:12px; color:var(--muted);">months</div>
+
+    <div style="margin-bottom:10px">
+      <div style="font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.08em;padding:9px 14px;background:rgba(14,165,200,.08);border-radius:8px 8px 0 0;border:1px solid rgba(14,165,200,.2)">Phase 3 — Series A Scale</div>
+      <div class="card" style="border-radius:0 0 11px 11px;border-top:none;border-color:rgba(14,165,200,.15)">
+        <div class="kv"><span class="kvl">Active subscribers</span><span class="kvv">50–100K</span></div>
+        <div class="kv"><span class="kvl">Customer acquisition cost</span><span class="kvv">≤€122</span></div>
+        <div class="kv"><span class="kvl">Monthly churn</span><span class="kvv">&lt;2%</span></div>
+        <div class="kv"><span class="kvl">Net Promoter Score</span><span class="kvv">&gt;60</span></div>
+        <div class="kv"><span class="kvl">Device redeployment rate</span><span class="kvv">80%+</span></div>
+      </div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Unit economics</div>
+    <div class="stats">
+      <div class="sbox"><div class="n">€925</div><div class="l">Lifetime value per subscriber (8 years)</div></div>
+      <div class="sbox"><div class="n">37%</div><div class="l">Gross margin at scale</div></div>
+      <div class="sbox"><div class="n">7.6×</div><div class="l">LTV:CAC ratio (€925 / €122)</div></div>
+      <div class="sbox"><div class="n">18–24</div><div class="l">Month payback period</div></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Risk management</div>
+    <div class="items">
+      <div class="item"><div class="iico">📊</div><div><div class="ititle">Data-driven spending gates</div><div class="idesc">Paid media only scales after CTR exceeds 2% via A/B testing. If unmet → budget shifts to earned media. No wasted spend.</div></div></div>
+      <div class="item"><div class="iico">🏦</div><div><div class="ititle">€10K contingency reserve</div><div class="idesc">5% of marketing budget held back for operational surprises. Standard practice for hardware ventures.</div></div></div>
+      <div class="item"><div class="iico">🎬</div><div><div class="ititle">Asset maximisation</div><div class="idesc">Every video and event asset repurposed into a 6-month content library — ensuring long-term ROI on production costs.</div></div></div>
+    </div>
+
+    <div class="dvd"></div>
+    <div class="sec">Skills demonstrated in this project</div>
+    <div class="tags" style="margin-top:0">
+      <span class="tag t">Social media strategy</span><span class="tag t">Content pillar creation</span><span class="tag t">AIDA funnel design</span><span class="tag t">UGC & community systems</span><span class="tag t">Audience segmentation</span><span class="tag t">Crowdfunding strategy</span><span class="tag">Competitive intelligence</span><span class="tag">KPI framework</span><span class="tag">Tone of voice</span><span class="tag">Budget allocation</span><span class="tag">Storytelling</span><span class="tag">B2B channel strategy</span>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<div class="footer">
-  <div class="footer-glow"></div>
-  <h2 class="footer-title">What This Demonstrates</h2>
-  <p class="footer-sub">Skills directly relevant to creative content, social media, and growth marketing roles.</p>
-  <div class="footer-tags">
-    <span class="footer-tag">📱 Social Media Strategy</span>
-    <span class="footer-tag">🎬 Content Pillars & Storytelling</span>
-    <span class="footer-tag">📊 AIDA Funnel Design</span>
-    <span class="footer-tag">🤝 UGC & Community Systems</span>
-    <span class="footer-tag">🎯 Audience Segmentation</span>
-    <span class="footer-tag">🚀 Crowdfunding Campaign Strategy</span>
-    <span class="footer-tag">💡 Competitive Intelligence</span>
-    <span class="footer-tag">📈 KPI & Performance Framework</span>
-    <span class="footer-tag">✍️ Tone of Voice Guidelines</span>
-    <span class="footer-tag">💶 Budget Allocation</span>
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="bn" id="btnPrev" onclick="changePage(-1)" disabled>← Prev</button>
+  <div class="pc-info">
+    <strong id="pageLabel">Cover</strong>
+    <span id="pageCount">0 of 7</span>
   </div>
+  <button class="bn p" id="btnNext" onclick="changePage(1)">Start Reading →</button>
 </div>
 
 <script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Trigger visible for hero items on load
-  document.querySelectorAll('.hero .reveal, .stats-bar .reveal').forEach(el => {
-    setTimeout(() => el.classList.add('visible'), 100);
+const PAGES=[
+  {id:'page-0',label:'Cover',nav:'Cover'},
+  {id:'page-1',label:'1 · Problem & Market',nav:'1'},
+  {id:'page-2',label:'2 · Competition',nav:'2'},
+  {id:'page-3',label:'3 · Targeting',nav:'3'},
+  {id:'page-4',label:'4 · Content & Social',nav:'4'},
+  {id:'page-5',label:'5 · Crowdfunding',nav:'5'},
+  {id:'page-6',label:'6 · Growth',nav:'6'},
+  {id:'page-7',label:'7 · KPIs',nav:'7'},
+];
+let cur=0;
+function buildNav(){
+  const np=document.getElementById('navPages');
+  const pd=document.getElementById('progressDots');
+  PAGES.forEach((p,i)=>{
+    const b=document.createElement('button');
+    b.className='nav-btn'+(i===0?' active':'');
+    b.textContent=p.nav;b.onclick=()=>goTo(i);b.id='nb'+i;np.appendChild(b);
+    const d=document.createElement('div');
+    d.className='progress-dot'+(i===0?' active':'');
+    d.onclick=()=>goTo(i);d.id='dot'+i;pd.appendChild(d);
   });
+}
+function goTo(n){
+  document.getElementById(PAGES[cur].id).classList.remove('active');
+  document.getElementById('nb'+cur).classList.remove('active');
+  document.getElementById('dot'+cur).classList.remove('active');
+  cur=n;window.scrollTo(0,0);
+  document.getElementById(PAGES[cur].id).classList.add('active');
+  document.getElementById('nb'+cur).classList.add('active');
+  document.getElementById('dot'+cur).classList.add('active');
+  document.getElementById('pageLabel').textContent=PAGES[cur].label;
+  document.getElementById('pageCount').textContent='Page '+cur+' of '+(PAGES.length-1);
+  document.getElementById('btnPrev').disabled=cur===0;
+  document.getElementById('btnNext').disabled=cur===PAGES.length-1;
+  document.getElementById('btnNext').textContent=cur===0?'Start Reading →':'Next →';
+}
+function changePage(d){goTo(Math.max(0,Math.min(PAGES.length-1,cur+d)));}
+buildNav();goTo(0);
 </script>
 </body>
 </html>
